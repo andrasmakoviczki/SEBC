@@ -11,6 +11,12 @@ sysctl vm.swappiness=1
 COMMAND="cat /etc/sysctl.conf | grep vm.swappiness"; \
 HOSTS="node0 node1 node2 node3 node4"; \
 for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+
+vm.swappiness = 1
+vm.swappiness = 1
+vm.swappiness = 1
+vm.swappiness = 1
+vm.swappiness = 1
 ```
 
 
