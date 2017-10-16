@@ -100,7 +100,7 @@ always madvise [never]  always madvise [never]
 always madvise [never]  always madvise [never]
 ```
 
-# Network interfaces
+# 5. Network interfaces
 
 ```
 COMMAND="/sbin/ip addr"; \
@@ -161,9 +161,45 @@ for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
        valid_lft forever preferred_lft forever
 ```
 
-# Hosts lookup
+# 6. Hosts lookup
 
 ## getent forward lookup
+
+```
+COMMAND="getent hosts $IPS"; \
+IPS="172.32.9.69 172.32.4.188 172.32.1.46 172.32.7.140 172.32.0.33"; \
+for i in $IPS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
+
+```
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+```
+
+## gentent reverse lookup
 
 ```
 COMMAND="getent hosts $HOSTS"; \
@@ -199,38 +235,33 @@ for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
 172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
 ```
 
-## gentent reverse lookup
+# 7. Nscd service status
 
 ```
-COMMAND="getent hosts $HOSTS"; \
-IPS="172.32.9.69 172.32.4.188 172.32.1.46 172.32.7.140 172.32.0.33"; \
-for i in $IPS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+COMMAND="sudo /sbin/service nscd status" \
+HOSTS="node0 node1 node2 node3 node4"; \
+for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
 ```
 
 ```
-172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
-172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
-172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
-172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
-172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
-172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
-172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
-172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
-172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
-172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
-172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
-172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
-172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
-172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
-172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
-172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
-172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
-172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
-172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
-172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
-172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
-172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
-172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
-172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
-172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+nscd (pid 2855) is running...
+nscd (pid 2162) is running...
+nscd (pid 2401) is running...
+nscd (pid 2364) is running...
+nscd (pid 2311) is running...
+```
+
+# 8. Ntpd service status
+```
+COMMAND="sudo /sbin/service ntpd status" \
+HOSTS="node0 node1 node2 node3 node4"; \
+for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
+
+```
+ntpd (pid 2750) is running...
+ntpd (pid  2201) is running...
+ntpd (pid  2440) is running...
+ntpd (pid  2403) is running...
+ntpd (pid  2350) is running...
 ```
