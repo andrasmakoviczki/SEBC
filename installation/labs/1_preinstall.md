@@ -161,7 +161,7 @@ for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
        valid_lft forever preferred_lft forever
 ```
 
-# Host forward
+# Hosts lookup
 
 ## getent forward lookup
 
@@ -169,6 +169,8 @@ for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
 COMMAND="getent hosts $HOSTS"; \
 HOSTS="node0 node1 node2 node3 node4"; \
 for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
+
 ```
 172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
 172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
