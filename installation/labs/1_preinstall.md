@@ -11,7 +11,9 @@ sysctl vm.swappiness=1
 COMMAND="cat /etc/sysctl.conf | grep vm.swappiness"; \
 HOSTS="node0 node1 node2 node3 node4"; \
 for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
 
+```
 vm.swappiness = 1
 vm.swappiness = 1
 vm.swappiness = 1
@@ -28,7 +30,9 @@ If I would made a production cluster, I would attach more disks for the hosts (I
 COMMAND="lsblk"; \
 HOSTS="node0 node1 node2 node3 node4"; \
 for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
 
+```
 NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
 xvda    202:0    0  50G  0 disk
 └─xvda1 202:1    0  50G  0 part /
@@ -52,7 +56,9 @@ xvda    202:0    0  50G  0 disk
 COMMAND="df -h"; \
 HOSTS="node0 node1 node2 node3 node4"; \
 for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
 
+```
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/xvda1       50G  789M   46G   2% /
 tmpfs           7.3G     0  7.3G   0% /dev/shm
@@ -84,7 +90,9 @@ echo never > /sys/kernel/mm/transparent_hugepage/enabled;
 COMMAND="echo -e \"$(cat /sys/kernel/mm/transparent_hugepage/defrag)\t$(cat /sys/kernel/mm/transparent_hugepage/enabled)\""; \
 HOSTS="node0 node1 node2 node3 node4"; \
 for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
 
+```
 always madvise [never]  always madvise [never]
 always madvise [never]  always madvise [never]
 always madvise [never]  always madvise [never]
@@ -98,7 +106,9 @@ always madvise [never]  always madvise [never]
 COMMAND="/sbin/ip addr"; \
 HOSTS="node0 node1 node2 node3 node4"; \
 for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
 
+```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -151,3 +161,74 @@ for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
        valid_lft forever preferred_lft forever
 ```
 
+# Host forward
+
+## getent forward lookup
+
+```
+COMMAND="getent hosts $HOSTS"; \
+HOSTS="node0 node1 node2 node3 node4"; \
+for i in $HOSTS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+```
+
+## gentent reverse lookup
+
+```
+COMMAND="getent hosts $HOSTS"; \
+IPS="172.32.9.69 172.32.4.188 172.32.1.46 172.32.7.140 172.32.0.33"; \
+for i in $IPS; do ssh -i BigDataSEBCkey.pem centos@$i $COMMAND; done
+```
+
+```
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+172.32.9.69     ip-172-32-9-69.eu-central-1.compute.internal node0
+172.32.4.188    ip-172-32-4-188.eu-central-1.compute.internal node1
+172.32.1.46     ip-172-32-1-46.eu-central-1.compute.internal node2
+172.32.7.140    ip-172-32-7-140.eu-central-1.compute.internal node3
+172.32.0.33     ip-172-32-0-33.eu-central-1.compute.internal node4
+```
