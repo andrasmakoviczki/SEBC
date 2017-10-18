@@ -203,8 +203,16 @@ No rows affected (0.121 seconds)
 
 ```
 [centos@ip-172-32-4-188 ~]$ kinit george
+```
+
+```
 Password for george@COMPUTE.INTERNAL:
+```
+
+```
 [centos@ip-172-32-4-188 ~]$ beeline
+
+```
 Beeline version 1.1.0-cdh5.9.3 by Apache Hive
 beeline> !connect jdbc:hive2://localhost:10000/default;principal=hive/ip-172-32-4-188.eu-central-1.compute.internal@COMPUTE.INTERNAL
 scan complete in 3ms
