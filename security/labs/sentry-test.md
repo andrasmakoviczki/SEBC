@@ -211,6 +211,7 @@ Password for george@COMPUTE.INTERNAL:
 
 ```
 [centos@ip-172-32-4-188 ~]$ beeline
+```
 
 ```
 Beeline version 1.1.0-cdh5.9.3 by Apache Hive
