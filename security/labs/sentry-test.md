@@ -133,7 +133,7 @@ INFO  : Completed executing command(queryId=hive_20171018211818_f1c24a3a-5436-4b
 INFO  : OK
 No rows affected (0.103 seconds)
 
-## Grant read privilege to reads
+# Grant read privilege to reads
 
 1: jdbc:hive2://localhost:10000/default> GRANT SELECT ON DATABASE default TO ROLE reads;
 INFO  : Compiling command(queryId=hive_20171018210303_ab20cefd-79eb-4cd5-aec1-7b1e68313be9): GRANT SELECT ON DATABASE default TO ROLE reads
@@ -157,7 +157,7 @@ INFO  : Completed executing command(queryId=hive_20171018210303_dfad957e-29c1-45
 INFO  : OK
 No rows affected (0.098 seconds)
 
-## Grant read privilege to writes
+# Grant read privilege to writes
 
 0: jdbc:hive2://localhost:10000/default> REVOKE ALL ON DATABASE default FROM ROLE writes;
 INFO  : Compiling command(queryId=hive_20171018211818_3e6e6b44-dd91-4c86-90ea-d02e8a75f8a7): REVOKE ALL ON DATABASE default FROM ROLE writes
