@@ -5,13 +5,15 @@
 ```
 
 ```
-Found 6 items
-drwxr-x---   - ernest  ernest           0 2017-10-20 08:48 /user/ernest
-drwxrwxrwx   - mapred  hadoop           0 2017-10-20 08:45 /user/history
-drwxrwxr-t   - hive    hive             0 2017-10-20 08:46 /user/hive
-drwxrwxr-x   - hue     hue              0 2017-10-20 08:46 /user/hue
-drwxrwxr-x   - oozie   oozie            0 2017-10-20 08:47 /user/oozie
-drwxr-x---   - siwicki siwicki          0 2017-10-20 08:48 /user/siwicki
+Found 8 items
+drwxr-xr-x   - andrasmakoviczki andrasmakoviczki          0 2017-10-20 08:52 /user/andrasmakoviczki
+drwxr-xr-x   - ernest           usa                       0 2017-10-20 08:54 /user/ernest
+drwxr-xr-x   - hdfs             supergroup                0 2017-10-20 08:51 /user/hdfs
+drwxrwxrwx   - mapred           hadoop                    0 2017-10-20 08:45 /user/history
+drwxrwxr-t   - hive             hive                      0 2017-10-20 08:46 /user/hive
+drwxrwxr-x   - hue              hue                       0 2017-10-20 08:46 /user/hue
+drwxrwxr-x   - oozie            oozie                     0 2017-10-20 08:47 /user/oozie
+drwxr-xr-x   - siwicki          emea                      0 2017-10-20 08:48 /user/siwicki
 ```
 
 # REST call (hosts)
