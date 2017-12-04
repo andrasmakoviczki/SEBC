@@ -125,6 +125,7 @@ Found 7 items
 
 ```
 [root@ip-172-32-7-232 ~]# hdfs fsck /user/ernest/tgen512m -files -blocks
+```
 
 ```
 Connecting to namenode via http://ip-172-32-7-232.eu-central-1.compute.internal:50070
